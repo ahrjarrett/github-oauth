@@ -1,10 +1,10 @@
 import React from 'react'
 
 const Student = props => {
-  console.log(props.match.params)
+  const { student } = props
   return (
     <div className="Student">
-      hi!
+      {student.login}
     </div>
   )
 

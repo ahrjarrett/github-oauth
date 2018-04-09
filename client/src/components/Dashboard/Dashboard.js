@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import Header from '../Header/Header'
-import Student from '../Student/Student'
 import accounts from '../../accounts'
 
 const githubUrl = 'https://api.github.com'
@@ -59,10 +59,9 @@ class Dashboard extends Component {
 	  </div>
 	  <div className="Dashboard--students">
 	    {users.map(user => (
-	      <Student
-		student={user}
-		key={user.id}
-		/>
+	      <div key={user.id}>
+		<Link to={`/students/${user.login}`}>{user.login}</Link>
+	      </div>
 	    ))}
 	  </div>
 	</div>

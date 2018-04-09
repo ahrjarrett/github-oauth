@@ -5,6 +5,7 @@ import axios from 'axios'
 import Dashboard from '../Dashboard/Dashboard'
 import Login from '../Login/Login'
 import Auth from '../Auth/Auth'
+import Student from '../Student/Student'
 
 import './App.css'
 
@@ -108,14 +109,13 @@ class App extends Component {
 		 Go to your <Link to="/dashboard">Dashboard</Link>
 	       </div>
 	       )}/>
-	     <div>
 	     <Route path="/dashboard" render={() => (
 	       <Dashboard
 		 user={this.state.user}
 		 token={this.state.token}
 		 />
 	     )} />
-	     </div>
+	     <Route path="/students/:student" component={Student}/>
 	   </div>
 
 	 )
