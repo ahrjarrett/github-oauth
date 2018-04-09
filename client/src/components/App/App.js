@@ -7,7 +7,6 @@ import Login from '../Login/Login'
 import Auth from '../Auth/Auth'
 
 import './App.css'
-import config from '../../config'
 
 class App extends Component {
   constructor(props) {
@@ -29,9 +28,7 @@ class App extends Component {
   }
 
   componentDidUpdate = (nextProps) => {
-    const { token } = window.localStorage
     const { user } = this.state
-
     if (user.login) return
 
     else if(this.state.state === window.localStorage.state) {
@@ -42,14 +39,13 @@ class App extends Component {
 	const { token } = data
 	window.localStorage.clear()
 	window.localStorage.setItem('token', token)
-	this.setState({ token })
 	return token
       }).then(token => {
-	return this.setUserWithToken(token)
+	this.setUserWithToken(token)
       })
     }
 
-    else console.log('please login')
+    else return
   }
 
   setUserWithToken = token => {
@@ -62,8 +58,11 @@ class App extends Component {
       }
     }).then(response => {
       user = response.data
-      console.log('user from getUser:', user)
-      this.setState({ user })
+      this.setState((prevState) => {
+	return this.state.token
+	  ? { user }
+	  : { user, token }
+      })
     })
   }
 
@@ -86,23 +85,41 @@ class App extends Component {
     return (
       <div className="App">
 	{!token
+
 	  ? (
-	    <div className="Login button">
-              <button onClick={this.handleLogin}>Login with Github</button>
-             </div>
-	    )
+	    <div>
+	      <div className="Login button">
+		<button onClick={this.handleLogin}>Login with Github</button>
+              </div>
+	      <div>
+      		<Route path="/login" component={Login} />
+		<Route path="/auth/callback" render={(props) => (
+		  <Auth propogateCode={this.propogateCode}/>
+		)} />
+	      </div>
+	    </div>
+	  )
+
 	 : (
-	   <div>Welcome, { user.name || user.login }!</div>
+	   <div>
+	     <Route exact path="/" render={() => (
+	       <div>
+		 Welcome, { user.name || user.login }!
+		 Go to your <Link to="/dashboard">Dashboard</Link>
+	       </div>
+	       )}/>
+	     <div>
+	     <Route path="/dashboard" render={() => (
+	       <Dashboard
+		 user={this.state.user}
+		 token={this.state.token}
+		 />
+	     )} />
+	     </div>
+	   </div>
+
 	 )
 	}
-
-	<div>
-      	  <Route path="/login" component={Login} />
-	  <Route path="/auth/callback" render={(props) => (
-	    <Auth propogateCode={this.propogateCode}/>
-	  )} />
-	  <Route path="/dashboard" render={() => (<Dashboard user={this.state.user}/>)} />
-	</div>
 
       </div>
     )
