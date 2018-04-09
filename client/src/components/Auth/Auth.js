@@ -1,33 +1,40 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import qs from 'qs'
 
 class Auth extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      code: 'magic'
+      code: '',
+      state: ''
     }
   }
 
-  propogateCode = code => {
-    this.props.propogateCode(code)
+  propogateCode = (query) => {
+    this.props.propogateCode(query)
   }
 
   componentDidMount = () => {
     const { location } = this.props
-    const search = qs.parse(location.search)
-    const code = search['?code']
+    // slice search to remove ? from beginning of query
+    const query = qs.parse(location.search.slice(1))
     this.setState(() => {
-      return { code }
+      return { code: query.code, state: query.state }
     })
-    this.propogateCode(code)
+    this.propogateCode(query)
+
   }
 
   render() {
     return (
       <div className="Auth">
-	Redirected from Github. Code: {this.state.code}
+	Redirected from Github.
+	<br/>
+	Code: {this.state.code}
+	<br/>
+	State: {this.state.state}
+	<Redirect to="/"/>
       </div>
     )
   }
