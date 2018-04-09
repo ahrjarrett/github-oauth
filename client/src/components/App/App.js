@@ -16,7 +16,6 @@ class App extends Component {
       code: '',
       state: '',
       token: '',
-      loggedIn: false,
       user: {}
     }
   }
@@ -33,14 +32,14 @@ class App extends Component {
     const { token } = window.localStorage
     const { user } = this.state
 
-    if (user.login) console.log('have user, no need to update!')
+    if (user.login) return
 
     else if(this.state.state === window.localStorage.state) {
       axios({
 	url: 'http://localhost:9999/authenticate/' + this.state.code,
 	json: true
       }).then(({ data }) => {
-	const token = data.token
+	const { token } = data
 	window.localStorage.clear()
 	window.localStorage.setItem('token', token)
 	this.setState({ token })
@@ -93,7 +92,7 @@ class App extends Component {
              </div>
 	    )
 	 : (
-	   <div>Welcome, {user.login}</div>
+	   <div>Welcome, { user.name || user.login }!</div>
 	 )
 	}
 
