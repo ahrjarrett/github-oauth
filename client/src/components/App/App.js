@@ -85,8 +85,8 @@ class App extends Component {
     const { token } = window.localStorage
     return (
       <div className="App">
-	{!token
 
+	{!token
 	  ? (
 	    <div>
 	      <div className="Login button">
