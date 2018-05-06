@@ -10,14 +10,11 @@ import Student from '../Student/Student'
 import './App.css'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      code: '',
-      state: '',
-      token: '',
-      user: {}
-    }
+  state = {
+    code: '',
+    state: '',
+    token: '',
+    user: {}
   }
 
   componentDidMount = () => {
@@ -98,7 +95,7 @@ class App extends Component {
 		  <Auth propogateCode={this.propogateCode}/>
 		)} />
 	      </div>
-	    </div>
+	      </div>
 	  )
 
 	 : (
@@ -108,7 +105,7 @@ class App extends Component {
 		 Welcome, { user.name || user.login }!
 		 Go to your <Link to="/dashboard">Dashboard</Link>
 	       </div>
-	       )}/>
+	     )}/>
 	     <Route path="/dashboard" render={() => (
 	       <Dashboard
 		 user={this.state.user}
@@ -116,7 +113,7 @@ class App extends Component {
 		 />
 	     )} />
 	     <Route path="/students/:student" component={Student}/>
-	   </div>
+	     </div>
 
 	 )
 	}
