@@ -1,6 +1,6 @@
 # Github OAuth - Client
 
-Made :blue_heart: with React.
+Made with :blue_heart: with React.
 
 To run, install with `yarn` and do `yarn start` from this directory.
 
