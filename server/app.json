@@ -1,9 +1,13 @@
 {
-  "name": "Gatekeeper",
-  "description": "Enables client-side applications to dance OAuth with GitHub.",
-  "website": "https://github.com/prose/gatekeeper",
-  "repository": "https://github.com/prose/gatekeeper",
-  "keywords": ["node", "github", "oauth"],
+  "name": "Github Authentication - OAuth Server",
+  "description": "Enables client-side applications to OAuth with GitHub.",
+  "website": "https://github.com/ahrjarrett/github-oauth",
+  "repository": "https://github.com/ahrjarrett/github-oauth",
+  "keywords": [
+    "node",
+    "github",
+    "oauth"
+  ],
   "env": {
     "OAUTH_CLIENT_ID": "",
     "OAUTH_CLIENT_SECRET": "",

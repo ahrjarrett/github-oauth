@@ -1,10 +1,12 @@
 {
-  "name": "gatekeeper",
-  "description": "Enables client-side applications to dance OAuth with Github.",
-  "url": "http://github.com/prose/gatekeeper",
+  "name": "github-oauth",
+  "description": "Enables client-side applications to OAuth with GitHub.",
+  "url": "https://github.com/ahrjarrett/github-oauth",
   "keywords": [
     "github",
-    "oauth"
+    "oauth",
+    "node",
+    "react"
   ],
   "scripts": {
     "start": "node index.js",
@@ -12,9 +14,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/prose/gatekeeper"
+    "url": "https://github.com/ahrjarrett/github-oauth"
   },
-  "author": "Michael Aufreiter",
+  "author": "Andrew Jarrett",
   "license": "MIT",
   "contributors": [],
   "dependencies": {
